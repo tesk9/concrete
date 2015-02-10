@@ -41,15 +41,14 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<style type="text/css">
+    html, body, #map-canvas { height: 97vh; margin: 0; padding-top: 3vh;}
+  </style>
 </head>
 
 <body class="ng-cloak">
 	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-	<section class="content">
-		<section class="container">
-			{% block content %}{% endblock %}
-		</section>
-	</section>
+
 
 	<!--Embedding The User Object-->
 	<script type="text/javascript">
@@ -61,8 +60,24 @@
 
 	{% if process.env.NODE_ENV === 'development' %}
 	<!--Livereload script rendered -->
+	<div id="map-canvas"></div>
 	<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
 	{% endif %}
+	<script type="text/javascript"
+		var googleMapAPI;
+    src="https://maps.googleapis.com/maps/api/js?key="+googleMapAPI>
+  </script>
+	<script type="text/javascript">
+    function initialize() {
+      var mapOptions = {
+        center: { lat: 37.7833, lng: -122.4167},
+        zoom: 12
+      };
+      var map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+   </script>
 </body>
 
 </html>
