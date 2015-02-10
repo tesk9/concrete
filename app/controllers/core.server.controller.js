@@ -3,6 +3,8 @@
 var api_key = process.env.USA_TODAY_API_KEY || "",
     googleMapAPI = process.env.GOOGLE_MAPS_API || ""
 
+
+console.log(googleMapAPI);
 /**
  * Module dependencies.
  */
