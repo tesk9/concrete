@@ -1,5 +1,8 @@
 'use strict';
 
+// Load environmental variables
+require('./locals.js');
+
 module.exports = {
 	db: 'mongodb://localhost/concrete-dev',
 	app: {
