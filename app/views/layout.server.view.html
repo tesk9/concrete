@@ -42,11 +42,8 @@
 
 <body class="ng-cloak">
 	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-
-	<section class="content">
-		<section class="container">
-			{% block content %}{% endblock %}
-		</section>
+	<section>
+		{% block content %}{% endblock %}
 	</section>
 
 	<!--Embedding The User Object-->
@@ -64,6 +61,9 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
 	{% endif %}
+
+	
+	
 </body>
 
 </html>

@@ -1,3 +1,16 @@
+.angular-google-map-container {
+  height: 100vh;
+  width: 100%;
+}
+
+.google-maps {
+  padding: 0;
+}
+
+/*.content {*/
+  /*margin-top: 15px !important;*/
+/*}*/
+
 html, body, #map-canvas { 
   height: 96vh; 
   margin-top: 3vh; 
