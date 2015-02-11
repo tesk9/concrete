@@ -11,8 +11,7 @@ var ApplicationConfiguration = (function() {
 																						 'ngSanitize',
 																						 'ui.router',
 																						 'ui.bootstrap',
-																						 'ui.utils',
-																						 'uiGmapgoogle-maps'];
+																						 'ui.utils'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
