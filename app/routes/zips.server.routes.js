@@ -19,4 +19,4 @@ module.exports = function(app) {
       res.send(allZips[zip]);
     }
   });
-}
+};
