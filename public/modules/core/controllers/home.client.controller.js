@@ -9,6 +9,15 @@ angular.module('core')
       libraries: 'places'
     });
   }])
+  .run(['$templateCache', function ($templateCache) {
+    $templateCache.put('window.tpl.html', '<div ng-controller="WindowCtrl" ng-init="showPlaceDetails(parameter)">{{place.name}}</div>');
+  }])
+  .controller('WindowCtrl', function ($scope) {
+    $scope.place = {};
+    $scope.showPlaceDetails = function(param) {
+      $scope.place = param;
+    }
+  })
   .controller('HomeController', ['$scope', 'uiGmapGoogleMapApi', 'Authentication',
   	function($scope, uiGmapGoogleMapApi, Authentication) {
   // 		// This provides Authentication context.
@@ -64,13 +73,13 @@ angular.module('core')
           events: {
             places_changed: function (searchBox) {
               
-              places = searchBox.getPlaces()
+              var places = searchBox.getPlaces()
 
               if (places.length == 0) {
                 return;
               }
               // For each place, get the icon, place name, and location.
-              newMarkers = [];
+              var newMarkers = [];
               var bounds = new google.maps.LatLngBounds();
               for (var i = 0, place; place = places[i]; i++) {
                 // Create a marker for each place.
@@ -120,7 +129,5 @@ angular.module('core')
           }
         }
       });
-
-
     }
   ]);
