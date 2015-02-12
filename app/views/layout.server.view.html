@@ -30,15 +30,17 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
   <!--Application CSS Files-->
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
-
 </head>
 
 <body class="ng-cloak">
-  <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-  <section>
-    {% block content %}{% endblock %}
-  </section>
-
+  <div class="col-xs-12">
+    <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header> 
+  </div>
+  <div class="content">
+    <section>
+      {% block content %}{% endblock %}
+    </section>
+  </div>
   <!--Embedding The User Object-->
   <script type="text/javascript">
     var user = {{ user | json | safe }};

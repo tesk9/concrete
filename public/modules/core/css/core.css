@@ -7,9 +7,9 @@
   padding: 0;
 }
 
-/*.content {*/
-  /*margin-top: 15px !important;*/
-/*}*/
+.content {
+  margin-top: 25px !important;
+}
 
 html, body, #map-canvas { 
   height: 96vh; 
