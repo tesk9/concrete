@@ -2,219 +2,58 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>{{title}}</title>
+  <title>{{title}}</title>
 
-	<!-- General META -->
-	<meta charset="utf-8">
-	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <!-- General META -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-	<!-- Semantic META -->
-	<meta name="keywords" content="{{keywords}}">
-	<meta name="description" content="{{description}}">
+  <!-- Semantic META -->
+  <meta name="keywords" content="{{keywords}}">
+  <meta name="description" content="{{description}}">
 
-	<!-- Facebook META -->
-	<meta property="fb:app_id" content="{{facebookAppId}}">
-	<meta property="og:site_name" content="{{title}}">
-	<meta property="og:title" content="{{title}}">
-	<meta property="og:description" content="{{description}}">
-	<meta property="og:url" content="{{url}}">
-	<meta property="og:image" content="/img/brand/logo.png">
-	<meta property="og:type" content="website">
+  <!-- Facebook META -->
+  <meta property="fb:app_id" content="{{facebookAppId}}">
+  <meta property="og:site_name" content="{{title}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{url}}">
+  <meta property="og:image" content="/img/brand/logo.png">
+  <meta property="og:type" content="website">
 
-	<!-- Fav Icon -->
-	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-	<!--Application CSS Files-->
-	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
+  <!-- Fav Icon -->
+  <link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <!--Application CSS Files-->
+  {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 
-	<!-- HTML5 Shim -->
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<style type="text/css">
-    html, body, #map-canvas { height: 95vh; margin-top: 0vh; padding-top: 3vh;}
-    .controls {
-        margin-top: 16px;
-        border: 1px solid transparent;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        height: 32px;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      }
-
-    .search-form {
-    	height:95vh;
-    	background-color: white;
-    }
-			
-		#pac-back {
-			position:relative;
-		}
-
-		.gmno-print {
-			position: absolute; 
-			top: 10px; 
-			left: 10px; 
-			z-index: 99;
-		}
-
-    #pac-input {
-      background-color: #fff;
-      padding: 0 11px 0 13px;
-      font-family: Roboto;
-      font-size: 15px;
-      font-weight: 300;
-      text-overflow: ellipsis;
-    }
-
-    #pac-input:focus {
-      border-color: #4d90fe;
-      margin-left: -1px;
-      padding-left: 14px;  /* Regular padding-left + 1. */
-    }
-
-    .pac-container {
-      font-family: Roboto;
-    }
-
-    #type-selector {
-      color: #fff;
-      background-color: #4d90fe;
-      padding: 5px 11px 0px 11px;
-    }
-
-    #type-selector label {
-      font-family: Roboto;
-      font-size: 13px;
-      font-weight: 300;
-    }
-	
-		.wrapper {
-			position: relative;
-		}
-
-		#over_map { 
-			position: absolute;
-			top: 10px; 
-			left: 10px; 
-			z-index: 99; 
-		}
-
-  </style>
 </head>
 
 <body class="ng-cloak">
-	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+  <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+  <section>
+    {% block content %}{% endblock %}
+  </section>
 
+  <!--Embedding The User Object-->
+  <script type="text/javascript">
+    var user = {{ user | json | safe }};
+  </script>
 
-	<!--Embedding The User Object-->
-	<script type="text/javascript">
-		var user = {{ user | json | safe }};
-	</script>
+  <!--Application JavaScript Files-->
+  {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
 
-	<!--Application JavaScript Files-->
-	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
+  {% if process.env.NODE_ENV === 'development' %}
+  <!--Livereload script rendered -->
 
-	{% if process.env.NODE_ENV === 'development' %}
-	<!--Livereload script rendered -->
-	
-		<!-- <input  type="text" class="form-control" placeholder="checking if this works"> -->
-  	<div id="map-canvas" class="col-md-9"></div>
-
-		<div id="pac-back" class="col-md-3 search-form">
-			<input id="pac-input" class="controls form-control" type="text" placeholder="Search Box">
-		</div>	
-
-	  
-  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
-	{% endif %}
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-	<script type="text/javascript">
-    function initialize() {
-
-			var markers = [];
-		  var map = new google.maps.Map(document.getElementById('map-canvas'), {
-		    mapTypeId: google.maps.MapTypeId.ROADMAP
-		  });
-
-		    var mapOptions = {
-        center: { lat: 37.7833, lng: -122.4167},
-        zoom: 12
-      };
-      var map = new google.maps.Map(document.getElementById('map-canvas'),
-          mapOptions);
-
-		   var input = /** @type {HTMLInputElement} */(
-		      document.getElementById('pac-input'));
-		  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-		  // map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(document.getElementById('pac-back'));
-
-		  var searchBox = new google.maps.places.SearchBox(
-		    /** @type {HTMLInputElement} */(input));
-
-		  // [START region_getplaces]
-		  // Listen for the event fired when the user selects an item from the
-		  // pick list. Retrieve the matching places for that item.
-		  google.maps.event.addListener(searchBox, 'places_changed', function() {
-		    var places = searchBox.getPlaces();
-
-		    if (places.length == 0) {
-		      return;
-		    }
-		    for (var i = 0, marker; marker = markers[i]; i++) {
-		      marker.setMap(null);
-		    }
-
-		    // For each place, get the icon, place name, and location.
-		    markers = [];
-		    var bounds = new google.maps.LatLngBounds();
-		    for (var i = 0, place; place = places[i]; i++) {
-		      var image = {
-		        url: place.icon,
-		        size: new google.maps.Size(71, 71),
-		        origin: new google.maps.Point(0, 0),
-		        anchor: new google.maps.Point(17, 34),
-		        scaledSize: new google.maps.Size(25, 25)
-		      };
-
-		      // Create a marker for each place.
-		      var marker = new google.maps.Marker({
-		        map: map,
-		        icon: image,
-		        title: place.name,
-		        position: place.geometry.location
-		      });
-
-		      markers.push(marker);
-
-		      bounds.extend(place.geometry.location);
-		    }
-
-		    map.fitBounds(bounds);
-		  });
-		  // [END region_getplaces]
-
-		  // Bias the SearchBox results towards places that are within the bounds of the
-		  // current map's viewport.
-		  google.maps.event.addListener(map, 'bounds_changed', function() {
-		    var bounds = map.getBounds();
-		    searchBox.setBounds(bounds);
-		  });
-		}
-
-		google.maps.event.addDomListener(window, 'load', initialize);
-   
-   </script>
+  <script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
+  {% endif %} 
 </body>
 
 </html>
