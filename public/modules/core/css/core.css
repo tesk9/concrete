@@ -3,22 +3,16 @@
   width: 100%;
 }
 
-.google-maps {
-  padding: 0;
-}
-
-.content {
-  margin-top: 25px !important;
-}
-
 html, body, #map-canvas { 
-  height: 96vh; 
-  margin-top: 3vh; 
-  padding-top: 3 vh;
-}
-
-.content {
-	margin-top: 50px;
+  bottom: 0;
+  display: block;
+  height: auto;
+  left: 0;
+  margin-top: 17px;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .controls {
