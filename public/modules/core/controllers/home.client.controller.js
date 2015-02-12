@@ -23,107 +23,76 @@ angular.module('core')
       $scope.authentication = Authentication;
 
       uiGmapGoogleMapApi.then(function(maps) {
-        maps.visualRefresh = true;
-      });
+        // Creates Google Maps object for sync purposes: 
+        var google = {};
+        google['maps'] = maps;
 
-      angular.extend($scope, {
-        selected: {
-          options: {
-            visible:false
+        var markers = [];
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
 
-          },
-          templateurl:'window.tpl.html',
-          templateparameter: {}
-        },
-        map: {
-          control: {},
-          center: {
-            latitude: 40.74349,
-            longitude: -73.990822
-          },
-          zoom: 12,
-          dragging: false,
-          bounds: {},
-          markers: [],
-          idkey: 'place_id',
-          events: {
-            idle: function (map) {
-                       
-            },
-            dragend: function(map) {
-              //update the search box bounds after dragging the map
-              var bounds = map.getBounds();
-              var ne = bounds.getNorthEast();
-              var sw = bounds.getSouthWest(); 
-              $scope.searchbox.options.bounds = new google.maps.LatLngBounds(sw, ne);
-              //$scope.searchbox.options.visible = true;
+        var defaultBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(37.7062, -122.4689),
+          new google.maps.LatLng(37.8246, -122.3711)
+        );
+
+        map.fitBounds(defaultBounds);
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        var searchBox = new google.maps.places.SearchBox((input));
+          // [START region_getplaces]
+          // Listen for the event fired when the user selects an item from the
+          // pick list. Retrieve the matching places for that item.
+          google.maps.event.addListener(searchBox, 'places_changed', function() {
+            var places = searchBox.getPlaces();
+
+            if(places.length == 0) {
+              return;
             }
-          }
-        },
-        searchbox: {
-          template:'searchbox.tpl.html',
-          position:'top-right',
-          options: {
-            bounds: {}
-          },
-          events: {
-            places_changed: function (searchBox) {
-              
-              var places = searchBox.getPlaces()
+            for(var i = 0, marker; marker = markers[i]; i++) {
+              marker.setMap(null);
+            }
 
-              if (places.length === 0) {
-                return;
-              }
-              // For each place, get the icon, place name, and location.
-              var newMarkers = [];
-              var bounds = new google.maps.LatLngBounds();
-              for (var i = 0, place; place = places[i]; i++) {
-                // Create a marker for each place.
-                var marker = {
-                  id:i,
-                  place_id: place.place_id,
-                  name: place.name,
-                  latitude: place.geometry.location.lat(),
-                  longitude: place.geometry.location.lng(),
-                  options: {
-                    visible:false
-                  },
-                  templateurl:'window.tpl.html',
-                  templateparameter: place
-                };
-                newMarkers.push(marker);
+            // For each place, get the icon, place name, and location.
+            markers = [];
+            var bounds = new google.maps.LatLngBounds();
 
-                bounds.extend(place.geometry.location);
-              }
-
-              $scope.map.bounds = {
-                northeast: {
-                  latitude: bounds.getNorthEast().lat(),
-                  longitude: bounds.getNorthEast().lng()
-                },
-                southwest: {
-                  latitude: bounds.getSouthWest().lat(),
-                  longitude: bounds.getSouthWest().lng()
-                }
+            for(var i = 0, place; place = places[i]; i++) {
+              var image = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
               };
 
-              _.each(newMarkers, function(marker) {
-                marker.closeClick = function() {
-                  $scope.selected.options.visible = false;
-                  marker.options.visble = false;
-                  return $scope.$apply();
-                };
-                marker.onClicked = function() {
-                  $scope.selected.options.visible = false;
-                  $scope.selected = marker;
-                  $scope.selected.options.visible = true;
-                };
+              // Create a marker for each place.
+              var marker = new google.maps.Marker({
+                map: map,
+                icon: image,
+                title: place.name,
+                position: place.geometry.location
               });
 
-              $scope.map.markers = newMarkers;
+              markers.push(marker);
+
+              bounds.extend(place.geometry.location);
             }
-          }
-        }
+
+            map.fitBounds(bounds);
+          });
+          // [END region_getplaces]
+
+          // Bias the SearchBox results towards places that are within the bounds of the
+          // current map's viewport.
+          google.maps.event.addListener(map, 'bounds_changed', function() {
+            var bounds = map.getBounds();
+            searchBox.setBounds(bounds);
+          });
       });
     }
   ]);
