@@ -4,7 +4,6 @@
 angular.module('core')
   .config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
     GoogleMapApi.configure({
-  //    key: 'your api key',
       v: '3.17',
       libraries: 'places'
     });
@@ -16,16 +15,15 @@ angular.module('core')
     $scope.place = {};
     $scope.showPlaceDetails = function(param) {
       $scope.place = param;
-    }
+    };
   })
   .controller('HomeController', ['$scope', 'uiGmapGoogleMapApi', 'Authentication',
-  	function($scope, uiGmapGoogleMapApi, Authentication) {
-  // 		// This provides Authentication context.
-  		$scope.authentication = Authentication;
+    function($scope, uiGmapGoogleMapApi, Authentication) {
+  //    // This provides Authentication context.
+      $scope.authentication = Authentication;
 
       uiGmapGoogleMapApi.then(function(maps) {
         maps.visualRefresh = true;
-
       });
 
       angular.extend($scope, {
@@ -64,18 +62,16 @@ angular.module('core')
         },
         searchbox: {
           template:'searchbox.tpl.html',
-          //position:'top-right',
-          position:'top-left',
+          position:'top-right',
           options: {
             bounds: {}
           },
-          //parentdiv:'searchBoxParent',
           events: {
             places_changed: function (searchBox) {
               
               var places = searchBox.getPlaces()
 
-              if (places.length == 0) {
+              if (places.length === 0) {
                 return;
               }
               // For each place, get the icon, place name, and location.
@@ -109,7 +105,7 @@ angular.module('core')
                   latitude: bounds.getSouthWest().lat(),
                   longitude: bounds.getSouthWest().lng()
                 }
-              }
+              };
 
               _.each(newMarkers, function(marker) {
                 marker.closeClick = function() {
