@@ -17,8 +17,8 @@ angular.module('core')
       $scope.place = param;
     };
   })
-  .controller('HomeController', ['$scope', 'uiGmapGoogleMapApi', 'Authentication',
-    function($scope, uiGmapGoogleMapApi, Authentication) {
+  .controller('HomeController', ['$scope', 'uiGmapGoogleMapApi', 'Authentication', '$http', 
+    function($scope, uiGmapGoogleMapApi, Authentication, $http) {
   //    // This provides Authentication context.
       $scope.authentication = Authentication;
 
@@ -32,12 +32,39 @@ angular.module('core')
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
+        var infowindow = new google.maps.InfoWindow();  
+
         var defaultBounds = new google.maps.LatLngBounds(
           new google.maps.LatLng(37.7062, -122.4689),
           new google.maps.LatLng(37.8246, -122.3711)
         );
 
         map.fitBounds(defaultBounds);
+
+        $http.get('/scraper').success(function(data) {
+          var geocoder = new google.maps.Geocoder();
+
+          data.forEach(function(location) {
+            if (location.cityState) {
+              var address = (location.name + ', ').concat(location.cityState);
+            } else {
+              var address = location.name;
+            }
+
+            geocoder.geocode( {address: address}, function(results, status) {
+              if (status === google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+                });
+              } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+              }
+            });
+          });
+          
+        });
 
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
