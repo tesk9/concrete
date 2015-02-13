@@ -28,7 +28,7 @@ module.exports = {
 	},
 	google: {
 		clientID: process.env.GOOGLE_ID || 'APP_ID',
-		clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
+		clientSecret: process.env.GOOGLE_TESS || 'APP_SECRET',
 		callbackURL: 'https://localhost:443/auth/google/callback'
 	}
 };

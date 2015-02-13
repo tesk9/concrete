@@ -17,7 +17,9 @@ module.exports = {
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.min.js',
 				'public/lib/angular-ui-utils/ui-utils.min.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js'
+				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
+				'public/lib/lodash/dist/lodash.min.js',
+				'public/lib/angular-google-maps/dist/angular-google-maps.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
@@ -30,7 +32,7 @@ module.exports = {
 	},
 	google: {
 		clientID: process.env.GOOGLE_ID || 'APP_ID',
-		clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
+		clientSecret: process.env.GOOGLE_TESS || 'APP_SECRET',
 		callbackURL: '/auth/google/callback'
 	}
 };
