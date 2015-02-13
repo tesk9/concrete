@@ -5,7 +5,6 @@ var fs = require('fs');
 module.exports = function(app) {
   // Route /medianincome returns an object with the median income and the zipcode
   var medianIncomes;
-
   app.get('/medianincome', function(req, res) {
     var zipcodes = req.query.zipcodes;
     var rangeInc = req.query.rangeInc;

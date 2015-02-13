@@ -1,7 +1,7 @@
 'use strict';
 
 // Zip code service for filtering results
-angular.module('core').service('medianIncome', [ '$http',
+angular.module('core').service('medianIncome', ['$http',
   function($http) {
     return {
       // zipcodes paramter of filteredZipCodes is an array of zipcode(s).

@@ -4,6 +4,7 @@ module.exports = function() {
   var properties = [
     {
       name: '953 Treat Avenue',
+      zipcode: 94110,
       cityState: 'San Francisco, CA',
       size: '0.09AC',
       numOfUnits: 2,
@@ -13,6 +14,7 @@ module.exports = function() {
     },
     {
       name: '2455 Harrison St',
+      zipcode: 94110,
       cityState: 'San Francisco, CA',
       size: '0.06AC',
       numOfUnits: 1,
@@ -22,6 +24,7 @@ module.exports = function() {
     },
     {
       name: '1943 Mission St',
+      zipcode: 94110,
       cityState: 'San Francisco, CA',
       size: '22,000SF',
       numOfUnits: 63,
@@ -31,6 +34,7 @@ module.exports = function() {
     },
     {
       name: '664-684 Larkin St',
+      zipcode: 94110,
       cityState: 'San Francisco, CA',
       size: '0.18AC',
       numOfUnits: 1,
@@ -40,6 +44,7 @@ module.exports = function() {
     },
     {
       name: '1980 Union St',
+      zipcode: 94123,
       cityState: 'San Francisco, CA',
       size: '0.13AC',
       numOfUnits: 1,
@@ -49,6 +54,7 @@ module.exports = function() {
     },
     {
       name: '410 Bayshore Blvd',
+      zipcode: 94124,
       cityState: 'San Francisco, CA',
       size: '6,525 SF',
       numOfUnits: 1,
@@ -58,6 +64,7 @@ module.exports = function() {
     },
     {
       name: '1221 Mission Street',
+      zipcode: 94103,
       cityState: 'San Francisco, CA',
       size: '2,691 SF',
       numOfUnits: 1,
@@ -67,6 +74,7 @@ module.exports = function() {
     },
     {
       name: '10 Arkansas St',
+      zipcode: 94107,
       cityState: 'San Francisco, CA',
       size: '3,300 SF',
       numOfUnits: 1,
@@ -76,6 +84,7 @@ module.exports = function() {
     },
     {
       name: '1485 Bayshore Blvd',
+      zipcode: 94124,
       cityState: 'San Francisco, CA',
       size: '1,160 SF',
       numOfUnits: 1,
@@ -85,6 +94,7 @@ module.exports = function() {
     },
     {
       name: '143 Second Street',
+      zipcode: 94105,
       cityState: 'San Francisco, CA',
       size: '19,449 SF',
       numOfUnits: 1,
@@ -94,6 +104,7 @@ module.exports = function() {
     },
     {
       name: '211 Sutter St',
+      zipcode: 94108,
       cityState: 'San Francisco, CA',
       size: '2,217 SF',
       numOfUnits: 2,
@@ -103,6 +114,7 @@ module.exports = function() {
     },
     {
       name: '2022 McAllister Street',
+      zipcode: 94118,
       cityState: 'San Francisco, CA',
       size: '3,300 SF',
       numOfUnits: 2,
@@ -112,6 +124,7 @@ module.exports = function() {
     },
     {
       name: '3117 Geary Boulevard',
+      zipcode: 94118,
       cityState: 'San Francisco, CA',
       size: '0.11 AC',
       numOfUnits: 1,

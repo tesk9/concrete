@@ -1,4 +1,16 @@
 <section data-ng-controller="HomeController">   
+  <div id="map-canvas" class="col-xs-9"></div>
   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-  <div id="map-canvas"></div>
+  <div id="search-panel" class="col-xs-3">
+    <input id="search-location" type="text" placeholder="City" ng-model="inputCity">
+    <input id="search-location" type="text" placeholder="State" ng-model="inputState">
+    <br />
+    Income: 
+    <br />
+    <input class="search-income income-min" type="text" ng-model="incomeMin">
+    -
+    <input class="search-income income-max" type="text" ng-model="incomeMax">
+    <br />
+    <button id="search-button">Search</button>
+  </div>
 </section>

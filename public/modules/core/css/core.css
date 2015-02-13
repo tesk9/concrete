@@ -6,13 +6,18 @@
 html, body, #map-canvas { 
   bottom: 0;
   display: block;
-  height: auto;
+  height: 100vh;
   left: 0;
   margin-top: 17px;
   padding: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
+}
+
+#search-panel {
+  margin-top: 17px;
+}
+
+.search-income {
+  width: 80px;
 }
 
 .controls {
