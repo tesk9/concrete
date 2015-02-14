@@ -2,7 +2,6 @@
 
 // Zip code service for filtering results
 angular.module('core').service('Zips', [ '$http',
-
   function($http) {
     return {
       filteredZipCodes: function(zipcodes, rangeInc, cb) {
