@@ -6,7 +6,7 @@ angular.module('core').service('ZipsOfCity', ['$http',
       find: function(city, state, cb) {
         $http({
           method: 'GET',
-          url: '/zipcodesOf/' + state + '/' + city
+          url: '/zipcodesof/' + state + '/' + city
         }).success(function(zipcodes){
           cb(zipcodes);
         });

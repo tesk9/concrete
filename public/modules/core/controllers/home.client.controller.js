@@ -17,11 +17,11 @@ angular.module('core')
       $scope.place = param;
     };
   })
-  .controller('HomeController', ['$scope', 'uiGmapGoogleMapApi', 'Authentication', '$http', 'ZipsOfCity',
-    function($scope, uiGmapGoogleMapApi, Authentication, $http, ZipsOfCity) {
+  .controller('HomeController', ['$scope', 'uiGmapGoogleMapApi', 'Authentication', '$http', 'ZipsOfCity', 'medianIncome',
+    function($scope, uiGmapGoogleMapApi, Authentication, $http, ZipsOfCity, medianIncome) {
   //    // This provides Authentication context.
       $scope.authentication = Authentication;
-      
+
       uiGmapGoogleMapApi.then(function(maps) {
         // Creates Google Maps object for sync purposes: 
         var google = {};

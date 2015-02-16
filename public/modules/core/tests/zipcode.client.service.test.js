@@ -1,29 +1,27 @@
 'use strict';
 
 (function() {
-  describe('Zips', function() {
+  describe('medianIncome', function() {
     //Initialize global variables
-    var zips, 
+    var medianIncome, 
       httpBackend;
 
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
 
-    beforeEach(inject(function(_Zips_, $httpBackend) {
-      zips = _Zips_;
+    beforeEach(inject(function(_medianIncome_, $httpBackend) {
+      medianIncome = _medianIncome_;
       httpBackend = $httpBackend;
     }));
 
     it('should filter given zipcodes by income', function() {
-      httpBackend.whenGET('/zip/94133').respond('50000');
-      httpBackend.whenGET('/zip/87114').respond('30000');
+      httpBackend.whenGET('/medianincome?rangeInc=34512&rangeInc=78212&zipcodes=94133&zipcodes=87114').respond([{zipcode:87114, medianIncome: 34000}]);
 
-      var filtered = [];
-      zips.filteredZipCodes([94133, 87114], ['34512', '78212'], function(zipcode) {
-        filtered.push(zipcode);
+      medianIncome.filterByZipcodes([94133, 87114], ['34512', '78212'], function(filtered) {
         expect(filtered.length).toEqual(1);
-        expect(filtered[0]).toEqual(94133);
+        expect(filtered[0].zipcode).toEqual(87114);
+        expect(filtered[0].medianIncome).toEqual(34000);
       });
 
       httpBackend.flush();
