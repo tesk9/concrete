@@ -13,11 +13,25 @@ html, body, #map-canvas {
 }
 
 #search-panel {
-  margin-top: 17px;
+  margin-top: 160px;
 }
 
-.search-income {
-  width: 80px;
+.income-box {
+  width:46%;
+}
+
+.hyphen-box {
+  width:3%;
+  margin-left:-4%;
+  margin-top:2%;
+}
+
+.space-bot-10 {
+  margin-bottom:10px;
+}
+
+.space-bot-50 {
+  margin-bottom:50px;
 }
 
 .controls {

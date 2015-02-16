@@ -28,14 +28,5 @@ module.exports = function(app) {
     } else {
       filter();
     }
-    
-    console.log('B');
-    zipcodes.forEach(function(zipcode){
-      if(Number(rangeInc[0]) <= Number(medianIncomes[zipcode]) && Number(medianIncomes[zipcode]) <= (rangeInc[1])) {
-        incomeArr.push({zipcode: zipcode, medianIncome: medianIncomes[zipcode]});
-      } 
-    });
-
-    res.send(incomeArr);
   });
 };
