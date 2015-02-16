@@ -8,9 +8,9 @@ angular.module('core').service('medianIncome', [ '$http',
       filterByZipcodes: function(zipcodes, rangeInc, cb) {
           $http({
             method: 'GET',
-            url: '/medianIncome',
+            url: '/medianincome',
             params: {zipcodes: zipcodes, rangeInc: rangeInc}
-          }).success(function(medIncArr) {
+          }).success(function(medInc) {
             // medInc is an object with two properties (zipcode and medianIncome)
             cb(medInc);
           }).error(function() {
