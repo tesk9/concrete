@@ -68,8 +68,10 @@ angular.module('core')
                       var coords = data.results[0].geometry.location;
                       var marker = new google.maps.Marker({
                         map: map,
-                        position: new google.maps.LatLng(coords.lat, coords.lng)
+                        position: new google.maps.LatLng(coords.lat, coords.lng),
+                        animation: google.maps.Animation.DROP
                       });
+                      
                       $scope.markers.push(marker);
                     });
                   });
