@@ -1,12 +1,13 @@
 'use strict';
 
 var fs = require('fs');
+var _ = require('lodash');
+var seedData = require('../controllers/API/seed_property.js')();
 
 module.exports = function(app) {
   // Route /medianincome returns an object with the median income and the zipcode
   var medianIncomes;
   app.get('/medianIncome', function(req, res) {
-    console.log("A");
     var zipcodes = req.query.zipcodes;
     var rangeInc = req.query.rangeInc;
     var incomeArr = [];
@@ -16,7 +17,17 @@ module.exports = function(app) {
           incomeArr.push({zipcode: zipcode, medianIncome: medianIncomes[zipcode]});
         } 
       });
-      res.send(incomeArr);
+
+      var zipArr = _.pluck(incomeArr, 'zipcode')
+        .map(function(zip) {
+          return parseInt(zip, 10);
+        });
+
+      var properties = seedData.filter(function(v) { 
+        return zipArr.indexOf(v.zipcode) >= 0;
+      });
+
+      res.send(properties);
     };
     // if medianIncomes isn't defined, parse the census data and assign to variable
     if(!medianIncomes) {
