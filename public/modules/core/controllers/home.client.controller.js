@@ -39,6 +39,8 @@ angular.module('core')
 
         map.fitBounds(defaultBounds);
 
+        $scope.markers = [];
+
         var propertySearch = document.getElementById('search-button');
         google.maps.event.addDomListener(propertySearch, 'click', function() {
         // If city and state are an input, find all the zipcodes for that city. 
@@ -47,11 +49,31 @@ angular.module('core')
               var zipcodes = obj.zip_codes;
             // If there are valid zipcodes = valid city and state, then filter that zipdcode based on the given income.
               if(zipcodes && $scope.incomeMin && $scope.incomeMax) {
-                medianIncome.filterByZipcodes(zipcodes, [$scope.incomeMin, $scope.incomeMax], function(data) {
+                medianIncome.filterByZipcodes(zipcodes, [$scope.incomeMin, $scope.incomeMax], function(properties) {
                   // Data is the zipcodes in the city that fits the income criteria. 
                   // Look at our list of commercial properties and get all of the ones that are
                   // in one of these zipcodes:
-                  console.log(data);
+                  //checks if there are any markers already existing, this will delete if true
+                  if ($scope.markers) {
+                    $scope.markers.forEach(function(marker) {
+                      marker.setMap(null);
+                    });
+                  }
+
+                  var addr = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+                  properties.forEach(function(v,i) {
+                    var address = v.name + ' ' + v.cityState;
+                    //for each property we do a get request and create a marker
+                    $http.get(addr+address).success(function(data, status, headers) {
+                      var coords = data.results[0].geometry.location;
+                      var marker = new google.maps.Marker({
+                        map: map,
+                        position: new google.maps.LatLng(coords.lat, coords.lng)
+                      });
+                      $scope.markers.push(marker);
+                    });
+                  });
+                 
                 });
               }
             });
