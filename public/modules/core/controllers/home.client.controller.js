@@ -51,6 +51,7 @@ angular.module('core')
                   // Data is the zipcodes in the city that fits the income criteria. 
                   // Look at our list of commercial properties and get all of the ones that are
                   // in one of these zipcodes:
+                  console.log(data);
                 });
               }
             });
