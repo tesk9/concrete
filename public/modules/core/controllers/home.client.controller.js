@@ -43,6 +43,8 @@ angular.module('core')
 
         var propertySearch = document.getElementById('search-button');
         google.maps.event.addDomListener(propertySearch, 'click', function() {
+          $scope.showProperties = true;
+
         // If city and state are an input, find all the zipcodes for that city. 
           if($scope.inputCity && $scope.inputState) {
             ZipsOfCity.find($scope.inputCity, $scope.inputState, function(obj) {
@@ -50,9 +52,7 @@ angular.module('core')
             // If there are valid zipcodes = valid city and state, then filter that zipdcode based on the given income.
               if(zipcodes && $scope.incomeMin && $scope.incomeMax) {
                 medianIncome.filterByZipcodes(zipcodes, [$scope.incomeMin, $scope.incomeMax], function(properties) {
-                  // Data is the zipcodes in the city that fits the income criteria. 
-                  // Look at our list of commercial properties and get all of the ones that are
-                  // in one of these zipcodes:
+                  $scope.filteredProperties = properties;
                   //checks if there are any markers already existing, this will delete if true
                   if ($scope.markers) {
                     $scope.markers.forEach(function(marker) {
@@ -75,7 +75,6 @@ angular.module('core')
                       $scope.markers.push(marker);
                     });
                   });
-                 
                 });
               }
             });

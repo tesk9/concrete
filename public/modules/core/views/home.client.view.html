@@ -1,7 +1,7 @@
 <section data-ng-controller="HomeController">   
   <div id="map-canvas" class="col-xs-9"></div>
-  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-  <div id="search-panel" class="col-xs-3 space-top-50">
+  <input id="pac-input" class="controls" type="text" placeholder="Search Nearby Businesses">
+  <div id="search-panel" class="col-xs-3 space-top-50" ng-hide="showProperties">
     <div class="row">
       <div class="col-xs-12">
         <h4>Location:</h4>
@@ -35,5 +35,30 @@
         <button id="search-button" class="btn btn-primary form-control">Search</button>
       </div>  
     </div>  
+  </div>
+  <div id="property-panel" class="col-xs-3" ng-show="showProperties">
+    <div class="col-xs-12 search-summary">
+      <button class="btn-sm btn-primary back-button" ng-click="showProperties = false">back</button>
+      <ol class="breadcrumb">
+        <li><a href="#">{{inputCity}}, {{inputState}}</a></li>
+        <li class="active"><a href="#">${{incomeMin}} to ${{incomeMax}}</a></li>
+      </ol>
+    </div>
+    <div class="col-xs-12 property-detail-wrapper" ng-repeat="property in filteredProperties">
+      <p><img class="property-image" src="{{property.img}}"></p>
+      <h5 class="property-name">{{property.name}}</h6>
+      <div class="property-detail">
+        <div><span class="property-label">Type: </span>{{property.type}}, <span class="property-label">Size: </span>{{property.size}}, <span class="property-label">Units: </span>{{property.numOfUnits}}</div>
+        <div class="property-description"><span class="property-label">Description: </span>{{property.description}}</div>
+      </div>
+      <div>
+        <div class="col-xs-12 col-md-10 option-buttons">
+          <button class="btn btn-primary more-button">&mldr; More</button>
+        </div>
+        <div class="col-xs-12 col-md-2 option-buttons">
+          <button class="btn btn-primary favorite-button">&starf;</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
