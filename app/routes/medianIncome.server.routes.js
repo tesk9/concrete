@@ -12,6 +12,9 @@ module.exports = function(app) {
     var rangeInc = req.query.rangeInc;
     var incomeArr = [];
     var filter = function() {
+      if (!zipcodes) {
+        zipcodes = [];
+      }
       zipcodes.forEach(function(zipcode){
         if(Number(rangeInc[0]) <= Number(medianIncomes[zipcode]) && Number(medianIncomes[zipcode]) <= Number(rangeInc[1])) {
           incomeArr.push({zipcode: zipcode, medianIncome: medianIncomes[zipcode]});

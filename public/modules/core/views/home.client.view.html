@@ -2,44 +2,46 @@
   <div id="map-canvas" class="col-xs-9"></div>
   <input id="pac-input" class="controls" type="text" placeholder="Search Nearby Businesses">
   <div id="search-panel" class="col-xs-3 space-top-50" ng-hide="showProperties">
-    <div class="row">
-      <div class="col-xs-12">
-        <h4>Location:</h4>
+    <form>
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Location:</h4>
+        </div>
       </div>
-    </div>
-    <div class="row space-bot-10">
-      <div class="col-xs-9">
-        <input id="search-location" type="text"  class="form-control" placeholder="City" ng-model="inputCity">
+      <div class="row space-bot-10">
+        <div class="col-xs-9">
+          <input id="search-location" type="text"  class="form-control" placeholder="City" ng-model="inputCity" required>
+        </div>
+        <div class="col-xs-3"> 
+          <input id="search-location" type="text" class="form-control" placeholder="State" ng-model="inputState" required>
+        </div>  
       </div>
-      <div class="col-xs-3"> 
-        <input id="search-location" type="text" class="form-control" placeholder="State" ng-model="inputState">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Income:</h4>
+        </div>
+      </div>
+      <div class="row space-bot-50">
+        <div class="col-xs-5 income-box">  
+          <input ng-class="test" class="search-income income-min form-control" type="text" placeholder="Min Income" ng-model="incomeMin" required>
+        </div>
+        <div class="col-xs-2 hyphen-box">to</div>
+        <div class="col-xs-5 income-box">  
+          <input ng-class="test" class="search-income income-max form-control" type="text" placeholder="Max Income" ng-model="incomeMax" ng-length=2 required>
+        </div>  
+        <br />
       </div>  
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <h4>Income:</h4>
-      </div>
-    </div>
-    <div class="row space-bot-50">
-      <div class="col-xs-5 income-box">  
-        <input class="search-income income-min form-control" type="text" placeholder="Min Income" ng-model="incomeMin">
-      </div>
-      <div class="col-xs-2 hyphen-box">to</div>
-      <div class="col-xs-5 income-box">  
-        <input class="search-income income-max form-control" type="text" placeholder="Max Income" ng-model="incomeMax">
+      <div class="row">
+        <div class="col-xs-12">
+          <button id="search-button" class="btn btn-primary form-control">Search</button>
+        </div>  
       </div>  
-      <br />
-    </div>  
-    <div class="row">
-      <div class="col-xs-12">
-        <button id="search-button" class="btn btn-primary form-control">Search</button>
-      </div>  
-    </div>  
-    <div class="row">
-      <div class="col-xs-12">
-        <p ng-show="searchErr" class="bg-danger">I'm sorry but your search produced no results</p>
-      </div>
-    </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <p ng-show="searchErr" class="bg-danger">I'm sorry but your search produced no results</p>
+        </div>
+      </div> 
+    </form>  
   </div>
   <div id="property-panel" class="col-xs-3" ng-show="showProperties">
     <div class="col-xs-12 search-summary">
@@ -50,7 +52,7 @@
       </ol>
     </div>
     <div class="col-xs-12 property-detail-wrapper" ng-repeat="property in filteredProperties">
-      <p><img class="property-image" src="{{property.img}}"></p>
+      <p><img class="property-image" ng-src="{{property.img}}"></p>
       <h5 class="property-name">{{property.name}}</h6>
       <div class="property-detail">
         <div><span class="property-label">Type: </span>{{property.type}}, <span class="property-label">Size: </span>{{property.size}}, <span class="property-label">Units: </span>{{property.numOfUnits}}</div>
