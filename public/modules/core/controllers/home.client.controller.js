@@ -16,8 +16,8 @@ angular.module('core')
       $scope.place = param;
     };
   })
-  .controller('HomeController', ['$scope', 'uiGmapGoogleMapApi', 'Authentication', '$http', 'ZipsOfCity', 'medianIncome',
-    function($scope, uiGmapGoogleMapApi, Authentication, $http, ZipsOfCity, medianIncome) {
+  .controller('HomeController', ['$scope', 'uiGmapGoogleMapApi', 'Authentication', '$http', 'ZipsOfCity', 'medianIncome', '$timeout',
+    function($scope, uiGmapGoogleMapApi, Authentication, $http, ZipsOfCity, medianIncome, $timeout) {
   //    // This provides Authentication context.
       $scope.authentication = Authentication;
 
@@ -43,7 +43,6 @@ angular.module('core')
 
         var propertySearch = document.getElementById('search-button');
         google.maps.event.addDomListener(propertySearch, 'click', function() {
-          $scope.showProperties = true;
 
         // If city and state are an input, find all the zipcodes for that city. 
           if($scope.inputCity && $scope.inputState) {
@@ -54,11 +53,22 @@ angular.module('core')
                 medianIncome.filterByZipcodes(zipcodes, [$scope.incomeMin, $scope.incomeMax], function(properties) {
                   $scope.filteredProperties = properties;
                   //checks if there are any markers already existing, this will delete if true
-                  if ($scope.markers) {
+                  var callAlert = function() {
+                    $scope.searchErr = false;
+                  };
+
+                  if(properties.length < 1) {
+                    $scope.searchErr = true;
+                    $timeout(callAlert, 2500);
+                  } else {
+                    $scope.showProperties = true;
+                  }
+
+                  if($scope.markers) {
                     $scope.markers.forEach(function(marker) {
                       marker.setMap(null);
                     });
-                  }
+                  }  
 
                   var addr = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
                   properties.forEach(function(v,i) {

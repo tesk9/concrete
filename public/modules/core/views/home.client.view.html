@@ -35,6 +35,11 @@
         <button id="search-button" class="btn btn-primary form-control">Search</button>
       </div>  
     </div>  
+    <div class="row">
+      <div class="col-xs-12">
+        <p ng-show="searchErr" class="bg-danger">I'm sorry but your search produced no results</p>
+      </div>
+    </div>
   </div>
   <div id="property-panel" class="col-xs-3" ng-show="showProperties">
     <div class="col-xs-12 search-summary">

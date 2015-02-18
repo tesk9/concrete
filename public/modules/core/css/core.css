@@ -34,6 +34,12 @@ html, body, #map-canvas {
   margin-bottom:50px;
 }
 
+.bg-danger {
+  padding: 8px;
+  border-radius:5px;
+  margin-top:20px;
+}
+
 .controls {
   margin-top: 16px;
   border: 1px solid transparent;
