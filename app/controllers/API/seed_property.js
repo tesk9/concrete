@@ -26,7 +26,7 @@ module.exports = function() {
       name: '1943 Mission St',
       zipcode: 94110,
       cityState: 'San Francisco, CA',
-      size: '22,000SF',
+      size: '22,000 SF',
       numOfUnits: 63,
       type: 'Building',
       img: 'http://x.lnimg.com/photo/thumb_288/18aaa0dfd05349dd9bab516e6efcd6a0.jpg',

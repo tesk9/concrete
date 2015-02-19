@@ -14,7 +14,7 @@ angular.module('core').service('medianIncome', ['$http',
             // medInc is an object with two properties (zipcode and medianIncome)
             cb(medInc);
           }).error(function() {
-            return;
+            cb('')
           });
       }
     };

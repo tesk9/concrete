@@ -41,6 +41,10 @@ angular.module('core')
 
         $scope.markers = [];
 
+        var callAlert = function() {
+          $scope.searchErr = false;
+        };
+
         var propertySearch = document.getElementById('search-button');
         google.maps.event.addDomListener(propertySearch, 'click', function() {
 
@@ -51,24 +55,21 @@ angular.module('core')
             // If there are valid zipcodes = valid city and state, then filter that zipdcode based on the given income.
               if(zipcodes && $scope.incomeMin && $scope.incomeMax) {
                 medianIncome.filterByZipcodes(zipcodes, [$scope.incomeMin, $scope.incomeMax], function(properties) {
-                  $scope.filteredProperties = properties;
                   //checks if there are any markers already existing, this will delete if true
-                  var callAlert = function() {
-                    $scope.searchErr = false;
-                  };
-
                   if(properties.length < 1) {
                     $scope.searchErr = true;
                     $timeout(callAlert, 2500);
-                  } else {
-                    $scope.showProperties = true;
-                  }
+                    return;
+                  } 
 
                   if($scope.markers) {
                     $scope.markers.forEach(function(marker) {
                       marker.setMap(null);
                     });
                   }  
+
+                  $scope.filteredProperties = properties;
+                  $scope.showProperties = true;
 
                   var addr = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
                   properties.forEach(function(v,i) {
@@ -86,9 +87,9 @@ angular.module('core')
                     });
                   });
                 });
-              }
+              } 
             });
-          }
+          } 
         });
 
         // Create the business type search box and link it to the UI element.
