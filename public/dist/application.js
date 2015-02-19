@@ -114,6 +114,32 @@ angular.module('core')
   //    // This provides Authentication context.
       $scope.authentication = Authentication;
 
+      $http.get('/favorites').success(function(favorites) {
+        $scope.checkFavorites = function(fav) {
+          var exists = false;
+          favorites.forEach(function(v) {
+            if (fav == v.address) {
+              exists = true;
+            }
+          });
+          return exists;
+        };
+      });
+
+
+      $scope.addFavorite = function(property) {
+        if (!$scope.checkFavorites(property.name)) {
+          $http.post('/favorites',{
+            address: property.name,
+            buildingType: property.type,
+            img: property.img,
+            size: property.size,
+            numOfUnits: property.numOfUnits,
+            description: property.description
+          });
+        }    
+      };
+
       uiGmapGoogleMapApi.then(function(maps) {
       // Creates Google Maps object for sync purposes: 
         var google = {};
@@ -159,26 +185,30 @@ angular.module('core')
                     $scope.markers.forEach(function(marker) {
                       marker.setMap(null);
                     });
-                  }  
-
-                  $scope.filteredProperties = properties;
-                  $scope.showProperties = true;
+                  } 
 
                   var addr = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+                  $scope.alphabetArr = [];
                   properties.forEach(function(v,i) {
                     var address = v.name + ' ' + v.cityState;
+                    var alphabet = String.fromCharCode('A'.charCodeAt(0) + i);
                     //for each property we do a get request and create a marker
                     $http.get(addr+address).success(function(data, status, headers) {
                       var coords = data.results[0].geometry.location;
                       var marker = new google.maps.Marker({
                         map: map,
                         position: new google.maps.LatLng(coords.lat, coords.lng),
+                        icon: 'http://maps.google.com/mapfiles/marker' + alphabet + '.png',
                         animation: google.maps.Animation.DROP
                       });
-                      
+
+                      $scope.alphabetArr.push(marker.icon);
                       $scope.markers.push(marker);
                     });
                   });
+                  $scope.filteredProperties = properties;
+                  $scope.showProperties = true;
+
                 });
               } 
             });
@@ -192,10 +222,12 @@ angular.module('core')
         var searchBox = new google.maps.places.SearchBox((input));
         google.maps.event.addListener(searchBox, 'places_changed', function() {
           var places = searchBox.getPlaces();
+          var infowindow = new google.maps.InfoWindow();
 
           if(places.length == 0) {
             return;
           }
+
           for(var i = 0, marker; marker = markers[i]; i++) {
             marker.setMap(null);
           }
@@ -205,6 +237,7 @@ angular.module('core')
           var bounds = new google.maps.LatLngBounds();
 
           for(var i = 0, place; place = places[i]; i++) {
+
             var image = {
               url: place.icon,
               size: new google.maps.Size(71, 71),

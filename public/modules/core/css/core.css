@@ -152,3 +152,30 @@ html, body, #map-canvas {
   margin-bottom: 8px;
   height: 25px;
 }
+
+.back-fav {
+  background: rgba(177, 183, 189, 0.3);
+  padding:20px;
+  height: 200px;
+}
+
+.fav-prop {
+  padding:20px 10px;
+  height: 500px;
+  background: rgba(177, 183, 189, 0.3);
+}
+
+.fav-title {
+  margin: 40px auto;
+  margin-bottom: 100px;
+}
+
+.each-favorite {
+  margin: 40px;
+  font-size: 1.2em;
+}
+
+.favorite-image {
+  height: 200px;
+  width: 100%;
+}

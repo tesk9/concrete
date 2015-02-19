@@ -1,6 +1,23 @@
 <section class="row" data-ng-controller="FavoritesController">
-  <h3 class="col-md-12 text-center">Your Favorite Listings</h3>
-  <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2" ng-repeat="favorite in favorites">
-    {{favorite.address}}
+  <div class="row">
+    <div class="col-xs-5">
+    </div>
+    <div class="col-xs-3">
+      <h2 class="fav-title">Your Favorite Listings</h3>
+    </div>  
+  </div>  
+  <div class="row" ng-repeat="favorite in favorites">
+    <div class="each-favorite">
+      <div class="col-xs-3">  
+        <img class="favorite-image" ng-src="{{favorite.img}}">
+      </div>
+      <div class="col-xs-9 back-fav">
+        <h4>{{favorite.address}}</h4>
+        <strong>Type: </strong>{{favorite.buildingType}}<br>
+        <strong>Size: </strong>{{favorite.size}}<br>
+        <strong>Units: </strong>{{favorite.numOfUnits}}<br>
+        <strong>Description: </strong>{{favorite.description}}
+      </div>
+    </div>      
   </div>
 </section>
