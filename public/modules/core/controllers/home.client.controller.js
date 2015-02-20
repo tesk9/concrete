@@ -170,7 +170,6 @@ angular.module('core')
           map.fitBounds(bounds);
         });
 
-
         // Make the bounds bias towards our search result: 
         google.maps.event.addListener(map, 'bounds_changed', function() {
           var bounds = map.getBounds();

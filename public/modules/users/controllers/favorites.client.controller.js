@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('FavoritesController', ['$scope', '$http',
-  function($scope, $http) {
+angular.module('users').controller('FavoritesController', ['$scope', '$http', '$state',
+  function($scope, $http, $state) {
     
     $http({
       method: 'GET',
@@ -10,5 +10,9 @@ angular.module('users').controller('FavoritesController', ['$scope', '$http',
       $scope.favorites = data;
     });
 
+    $scope.deleteFavorite = function(id) {
+      $http.delete('/favorites/'+id);
+      $state.reload();
+    }
   }
 ]);

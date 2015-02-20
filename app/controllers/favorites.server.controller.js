@@ -31,7 +31,6 @@ exports.create = function(req, res) {
  */
 exports.delete = function(req, res) {
 	var favorite = req.favorite;
-
 	favorite.remove(function(err) {
 		if(err) {
 			return res.status(400).send({

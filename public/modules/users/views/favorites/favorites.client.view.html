@@ -12,11 +12,16 @@
         <img class="favorite-image" ng-src="{{favorite.img}}">
       </div>
       <div class="col-xs-9 back-fav">
-        <h4>{{favorite.address}}</h4>
-        <strong>Type: </strong>{{favorite.buildingType}}<br>
-        <strong>Size: </strong>{{favorite.size}}<br>
-        <strong>Units: </strong>{{favorite.numOfUnits}}<br>
-        <strong>Description: </strong>{{favorite.description}}
+        <div class="col-xs-11">
+          <h4>{{favorite.address}}</h4>
+          <strong>Type: </strong>{{favorite.buildingType}}<br>
+          <strong>Size: </strong>{{favorite.size}}<br>
+          <strong>Units: </strong>{{favorite.numOfUnits}}<br>
+          <strong>Description: </strong>{{favorite.description}}
+        </div>
+        <div class="col-xs-1">
+          <a ng-click="deleteFavorite(favorite._id)" class="btn btn-danger">Delete</a>
+        </div>  
       </div>
     </div>      
   </div>
