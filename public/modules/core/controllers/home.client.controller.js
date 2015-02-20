@@ -21,6 +21,32 @@ angular.module('core')
   //    // This provides Authentication context.
       $scope.authentication = Authentication;
 
+      $http.get('/favorites').success(function(favorites) {
+        $scope.checkFavorites = function(fav) {
+          var exists = false;
+          favorites.forEach(function(v) {
+            if (fav == v.address) {
+              exists = true;
+            }
+          });
+          return exists;
+        };
+      });
+
+
+      $scope.addFavorite = function(property) {
+        if (!$scope.checkFavorites(property.name)) {
+          $http.post('/favorites',{
+            address: property.name,
+            buildingType: property.type,
+            img: property.img,
+            size: property.size,
+            numOfUnits: property.numOfUnits,
+            description: property.description
+          });
+        }    
+      };
+
       uiGmapGoogleMapApi.then(function(maps) {
       // Creates Google Maps object for sync purposes: 
         var google = {};

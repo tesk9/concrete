@@ -22,7 +22,12 @@ var FavoriteSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  }
+  },
+  img: String,
+  buildingType: String,
+  size: String,
+  numOfUnits: Number,
+  description: String
 });
 
 mongoose.model('Favorite', FavoriteSchema);
