@@ -53,7 +53,7 @@
     </div>
     <div class="col-xs-12 property-detail-wrapper" ng-repeat="property in filteredProperties">
       <p><img class="property-image" ng-src="{{property.img}}"></p>
-      <h5 class="property-name">{{property.name}}</h6>
+      <h5 class="property-name"><img class="property-alphabet" ng-src="{{alphabetArr[$index]}}">{{property.name}}</h5>
       <div class="property-detail">
         <div><span class="property-label">Type: </span>{{property.type}}, <span class="property-label">Size: </span>{{property.size}}, <span class="property-label">Units: </span>{{property.numOfUnits}}</div>
         <div class="property-description"><span class="property-label">Description: </span>{{property.description}}</div>
