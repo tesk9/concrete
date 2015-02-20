@@ -147,3 +147,8 @@ html, body, #map-canvas {
   width: 100%;
 }
 
+.property-alphabet {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  height: 25px;
+}
