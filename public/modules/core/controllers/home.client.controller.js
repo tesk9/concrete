@@ -26,13 +26,14 @@ angular.module('core')
         $scope.favorites = favorites;
       });
 
-      $scope.addFavorite = function(property) {
-        var exists = false;
-        $scope.favorites.forEach(function(favorite) {    
-          if (property.name == favorite.address) {
-            exists = true;
-          }
+      $scope.checkFavorites = function(property) {
+        return $scope.favorites.some(function(favorite) {    
+          return property.name == favorite.address;
         });
+      };
+
+      $scope.addFavorite = function(property) {
+        var exists = $scope.checkFavorites(property);
 
         if (!exists) {
           $http.post('/favorites', {

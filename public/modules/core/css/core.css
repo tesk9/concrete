@@ -179,3 +179,11 @@ html, body, #map-canvas {
   height: 200px;
   width: 100%;
 }
+
+.yellow-star {
+  color: #FFC200;
+}
+
+.yellow-star:hover {
+  color: #FFC200;
+}

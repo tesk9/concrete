@@ -63,7 +63,7 @@
           <button class="btn btn-primary more-button">&mldr; More</button>
         </div>
         <div class="col-xs-12 col-md-2 option-buttons">
-          <button ng-click="addFavorite(property)" class="btn btn-primary favorite-button">&starf;</button>
+          <button ng-click="addFavorite(property)" ng-class="{'yellow-star': checkFavorites(property)}" class="btn btn-primary favorite-button">&starf;</button>
         </div>
       </div>
     </div>
