@@ -21,21 +21,20 @@ angular.module('core')
   //    // This provides Authentication context.
       $scope.authentication = Authentication;
 
+      $scope.favorites;
       $http.get('/favorites').success(function(favorites) {
-        $scope.checkFavorites = function(fav) {
-          var exists = false;
-          favorites.forEach(function(v) {
-            if (fav == v.address) {
-              exists = true;
-            }
-          });
-          return exists;
-        };
+        $scope.favorites = favorites;
       });
 
-
       $scope.addFavorite = function(property) {
-        if (!$scope.checkFavorites(property.name)) {
+        var exists = false;
+        $scope.favorites.forEach(function(favorite) {    
+          if (property.name == favorite.address) {
+            exists = true;
+          }
+        });
+
+        if (!exists) {
           $http.post('/favorites',{
             address: property.name,
             buildingType: property.type,
@@ -43,6 +42,8 @@ angular.module('core')
             size: property.size,
             numOfUnits: property.numOfUnits,
             description: property.description
+          }).success(function(data) { 
+            $scope.favorites.push(data); 
           });
         }    
       };
