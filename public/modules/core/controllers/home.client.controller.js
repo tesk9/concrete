@@ -35,7 +35,7 @@ angular.module('core')
         });
 
         if (!exists) {
-          $http.post('/favorites',{
+          $http.post('/favorites', {
             address: property.name,
             buildingType: property.type,
             img: property.img,
